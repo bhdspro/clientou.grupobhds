@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientou - Serviços Especializados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .option-card.active { border-color: #2563eb; background-color: #eff6ff; border-width: 2px; }
+        .payment-card.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        /* Animação suave para abrir os campos extras */
+        .expandable { transition: all 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+        .expandable.open { max-height: 200px; opacity: 1; margin-top: 0.5rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen pb-12">
+
+    <!-- Header Neutro CLIENTOU -->
+    <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-black text-blue-600 tracking-tighter">CLIENTOU</h1>
+                <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400 -mt-1">Serviços Especializados</p>
+            </div>
+            <!-- REMOVIDO: PRESTADORES ONLINE -->
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-4 mt-6">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6">
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-slate-800">Solicitar Guincho Agora</h2>
+                <p class="text-slate-500 text-sm">Conectamos você aos melhores prestadores da região.</p>
+            </div>
+
+            <form id="towForm" class="space-y-6">
+                <!-- Nome -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Seu Nome</label>
+                    <input type="text" id="name" required placeholder="Digite seu nome completo" 
+                        class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
+                </div>
+
+                <!-- WhatsApp -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Seu WhatsApp (Com DDD)</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                        </span>
+                        <input type="tel" id="phone" required placeholder="(00) 00000-0000" 
+                            class="w-full pl-11 pr-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1 ml-1">O prestador entrará em contato por este número.</p>
+                </div>
+
+                <!-- Tipo de Veículo -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide text-[11px]">Tipo do Veículo</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" onclick="selectType('Carro')" class="option-card border-2 border-slate-100 rounded-2xl p-4 flex flex-col items-center gap-2 transition-all bg-slate-50">
+                            <i data-lucide="car" class="w-6 h-6"></i>
+                            <span class="text-xs font-bold">Carro</span>
+                        </button>
+                        <button type="button" onclick="selectType('Moto')" class="option-card border-2 border-slate-100 rounded-2xl p-4 flex flex-col items-center gap-2 transition-all bg-slate-50">
+                            <i data-lucide="bike" class="w-6 h-6"></i>
+                            <span class="text-xs font-bold">Moto</span>
+                        </button>
+                        <button type="button" onclick="selectType('Outro')" class="option-card border-2 border-slate-100 rounded-2xl p-4 flex flex-col items-center gap-2 transition-all bg-slate-50">
+                            <i data-lucide="truck" class="w-6 h-6"></i>
+                            <span class="text-xs font-bold">Outros</span>
+                        </button>
+                    </div>
+                    <input type="hidden" id="vehicleType" required>
+                </div>
+
+                <!-- Modelo do Veículo -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Qual é o veículo?</label>
+                    <input type="text" id="vehicleModel" required placeholder="Ex: CG 160, Honda Civic, etc" 
+                        class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
+                </div>
+
+                <!-- Onde buscar -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-slate-700 uppercase tracking-wide text-[11px]">Onde buscar?</label>
+                    <div class="relative">
+                        <input type="text" id="origin" required placeholder="Endereço ou use o GPS ao lado" 
+                            class="w-full px-4 py-4 pr-14 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
+                        <button type="button" onclick="getLocation('origin')" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Onde levar -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-slate-700 uppercase tracking-wide text-[11px]">Onde levar?</label>
+                    <div class="relative">
+                        <input type="text" id="destination" required placeholder="Endereço de destino" 
+                            class="w-full px-4 py-4 pr-14 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
+                        <button type="button" onclick="getLocation('destination')" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-slate-200 text-slate-600 rounded-xl flex items-center justify-center">
+                            <i data-lucide="navigation-2" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Problema -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Qual o problema?</label>
+                    <textarea id="issue" rows="2" placeholder="Ex: Moto travada, acidente, pane elétrica..." 
+                        class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all resize-none text-sm"></textarea>
+                </div>
+
+                <!-- Agendamento -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Quando retirar?</label>
+                    <div class="flex gap-2 p-1.5 bg-slate-100 rounded-2xl">
+                        <button type="button" onclick="setSchedule('AGORA')" id="btnAgora" class="flex-1 py-3 px-4 rounded-xl bg-white shadow-sm font-bold text-sm text-blue-600 transition-all">AGORA</button>
+                        <button type="button" onclick="setSchedule('AGENDAR')" id="btnAgendar" class="flex-1 py-3 px-4 rounded-xl text-slate-500 font-bold text-sm transition-all">AGENDAR</button>
+                    </div>
+                    <input type="datetime-local" id="scheduleDate" class="hidden mt-3 w-full px-4 py-4 rounded-2xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm">
+                </div>
+
+                <!-- Pagamento -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide text-[11px]">Forma de Pagamento</label>
+                    
+                    <!-- Opções Principais -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="selectPayment('Pix')" class="payment-card border-2 border-slate-100 rounded-xl px-2 py-4 text-center text-xs font-bold flex flex-col items-center gap-1 transition-all bg-slate-50">
+                            <i data-lucide="qr-code" class="w-5 h-5"></i>
+                            Pix
+                        </button>
+                        <button type="button" onclick="selectPayment('Dinheiro')" class="payment-card border-2 border-slate-100 rounded-xl px-2 py-4 text-center text-xs font-bold flex flex-col items-center gap-1 transition-all bg-slate-50">
+                            <i data-lucide="banknote" class="w-5 h-5"></i>
+                            Dinheiro
+                        </button>
+                        <button type="button" onclick="selectPayment('Cartão')" class="payment-card border-2 border-slate-100 rounded-xl px-2 py-4 text-center text-xs font-bold flex flex-col items-center gap-1 transition-all bg-slate-50">
+                            <i data-lucide="credit-card" class="w-5 h-5"></i>
+                            Cartão
+                        </button>
+                    </div>
+
+                    <!-- Campos Condicionais -->
+                    
+                    <!-- Dinheiro: Troco -->
+                    <div id="moneyOptions" class="expandable">
+                        <label class="block text-xs font-bold text-blue-600 mb-1 ml-1 mt-2">Precisa de troco para quanto?</label>
+                        <input type="text" id="changeAmount" placeholder="Ex: R$ 50,00 ou 'Não precisa'" 
+                            class="w-full px-4 py-3 rounded-xl bg-blue-50 border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm font-medium">
+                    </div>
+
+                    <!-- Cartão: Débito ou Crédito -->
+                    <div id="cardOptions" class="expandable">
+                        <label class="block text-xs font-bold text-blue-600 mb-1 ml-1 mt-2">Qual tipo de cartão?</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="setCardType('Débito')" class="card-type-btn border border-blue-200 bg-blue-50 text-blue-700 rounded-xl py-3 text-sm font-bold hover:bg-blue-100 transition-colors">
+                                DÉBITO
+                            </button>
+                            <button type="button" onclick="setCardType('Crédito')" class="card-type-btn border border-blue-200 bg-blue-50 text-blue-700 rounded-xl py-3 text-sm font-bold hover:bg-blue-100 transition-colors">
+                                CRÉDITO
+                            </button>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="paymentMethod" required>
+                    <input type="hidden" id="finalPaymentDetail" required>
+                </div>
+
+                <!-- Observações -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Observações</label>
+                    <textarea id="notes" rows="2" placeholder="Algo mais que o prestador precisa saber?" 
+                        class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none text-sm"></textarea>
+                </div>
+
+                <!-- Botão de Envio -->
+                <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-[0.98] flex items-center justify-center gap-3 text-lg uppercase tracking-wider">
+                    <i data-lucide="zap" class="w-6 h-6 fill-white"></i>
+                    SOLICITAR AGORA
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-8 text-center">
+            <p class="text-slate-400 text-[10px] uppercase font-bold tracking-[0.2em]">Plataforma Segura CLIENTOU</p>
+            <div class="flex justify-center gap-4 mt-2 opacity-30 grayscale">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <i data-lucide="lock" class="w-5 h-5"></i>
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+            </div>
+        </div>
+    </main>
+
+    <!-- Overlay de Loading -->
+    <div id="loading" class="fixed inset-0 bg-white/90 backdrop-blur-md z-[100] hidden flex flex-col items-center justify-center">
+        <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="font-black text-blue-600 text-xl animate-pulse tracking-tight">ENVIANDO PARA OS PRESTADORES...</p>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div id="successModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[110] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[40px] p-10 max-w-sm w-full text-center shadow-2xl">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check" class="w-12 h-12 stroke-[3]"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-3 text-slate-800 tracking-tight">SOLICITADO!</h3>
+            <p class="text-slate-500 text-sm mb-8 leading-relaxed">As informações foram enviadas para os prestadores. Aguarde o contato em seu <b>WhatsApp</b>.</p>
+            <button onclick="window.location.reload()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest shadow-lg transform transition active:scale-95">OK, ENTENDI</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let selectedType = '';
+        let selectedPayment = ''; // Armazena: Pix, Dinheiro, Cartão
+        let selectedCardDetail = ''; // Armazena: Débito ou Crédito
+        let schedule = 'AGORA';
+
+        function selectType(type) {
+            selectedType = type;
+            document.getElementById('vehicleType').value = type;
+            document.querySelectorAll('.option-card').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(type));
+            });
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.getElementById('paymentMethod').value = method;
+            
+            // UI Update nos botões principais
+            document.querySelectorAll('.payment-card').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(method));
+            });
+
+            // Gerenciar visibilidade das sub-opções
+            const moneyOpts = document.getElementById('moneyOptions');
+            const cardOpts = document.getElementById('cardOptions');
+            
+            // Resetar sub-seleções ao trocar o método principal
+            selectedCardDetail = ''; 
+            document.querySelectorAll('.card-type-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                btn.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
+            });
+            document.getElementById('changeAmount').value = '';
+
+            if (method === 'Dinheiro') {
+                moneyOpts.classList.add('open');
+                cardOpts.classList.remove('open');
+            } else if (method === 'Cartão') {
+                cardOpts.classList.add('open');
+                moneyOpts.classList.remove('open');
+            } else {
+                // Pix
+                moneyOpts.classList.remove('open');
+                cardOpts.classList.remove('open');
+            }
+        }
+
+        function setCardType(type) {
+            selectedCardDetail = type;
+            // Visual feedback
+            document.querySelectorAll('.card-type-btn').forEach(btn => {
+                if(btn.textContent.includes(type.toUpperCase())) {
+                    btn.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-200');
+                    btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                } else {
+                    btn.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
+                    btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                }
+            });
+        }
+
+        function setSchedule(mode) {
+            schedule = mode;
+            const btnA = document.getElementById('btnAgora');
+            const btnAg = document.getElementById('btnAgendar');
+            const dateInput = document.getElementById('scheduleDate');
+
+            if(mode === 'AGORA') {
+                btnA.classList.add('bg-white', 'shadow-sm', 'text-blue-600');
+                btnA.classList.remove('text-slate-500');
+                btnAg.classList.remove('bg-white', 'shadow-sm', 'text-blue-600');
+                btnAg.classList.add('text-slate-500');
+                dateInput.classList.add('hidden');
+            } else {
+                btnAg.classList.add('bg-white', 'shadow-sm', 'text-blue-600');
+                btnAg.classList.remove('text-slate-500');
+                btnA.classList.remove('bg-white', 'shadow-sm', 'text-blue-600');
+                btnA.classList.add('text-slate-500');
+                dateInput.classList.remove('hidden');
+            }
+        }
+
+        async function getLocation(fieldId) {
+            const btn = event.currentTarget;
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>';
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    document.getElementById(fieldId).value = `https://www.google.com/maps?q=${lat},${lon}`;
+                    btn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i>';
+                    lucide.createIcons();
+                }, () => {
+                    alert("Acesso à localização negado. Digite o endereço manualmente.");
+                    btn.innerHTML = originalIcon;
+                    lucide.createIcons();
+                }, { timeout: 10000 });
+            }
+        }
+
+        document.getElementById('towForm').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            if(!selectedType) { alert("Selecione o tipo do veículo."); return; }
+            if(!selectedPayment) { alert("Selecione a forma de pagamento."); return; }
+            
+            // Validações extras para Cartão e Dinheiro
+            let finalPaymentString = selectedPayment;
+            
+            if (selectedPayment === 'Cartão') {
+                if (!selectedCardDetail) {
+                    alert("Por favor, selecione se é Débito ou Crédito.");
+                    return;
+                }
+                finalPaymentString = `Cartão (${selectedCardDetail})`;
+            } else if (selectedPayment === 'Dinheiro') {
+                const change = document.getElementById('changeAmount').value;
+                if (change) {
+                    finalPaymentString = `Dinheiro (Troco para: ${change})`;
+                } else {
+                    finalPaymentString = `Dinheiro (Sem troco)`;
+                }
+            }
+
+            const loading = document.getElementById('loading');
+            loading.classList.remove('hidden');
+
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                type: selectedType,
+                model: document.getElementById('vehicleModel').value,
+                origin: document.getElementById('origin').value,
+                destination: document.getElementById('destination').value,
+                issue: document.getElementById('issue').value,
+                schedule: schedule === 'AGORA' ? 'AGORA (IMEDIATO)' : document.getElementById('scheduleDate').value,
+                payment: finalPaymentString, // Envia a string formatada
+                notes: document.getElementById('notes').value
+            };
+
+            try {
+                // URL DO SEU BACKEND NO RENDER
+                const BACKEND_URL = 'https://seu-app-no-render.onrender.com/send-message';
+                
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('successModal').classList.remove('hidden');
+                } else {
+                    alert("Ocorreu um erro no servidor. Tente novamente.");
+                }
+            } catch (err) {
+                alert("Erro de conexão. Verifique sua internet.");
+            } finally {
+                loading.classList.add('hidden');
+            }
+        };
+    </script>
+</body>
+</html>
