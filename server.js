@@ -50,17 +50,17 @@ app.post('/send-message', async (req, res) => {
 
     const message = 
         `🛠️ *NOVA SOLICITAÇÃO - CLIENTOU*\n\n` +
-        `*Cliente:* ${data.name ? data.name.toUpperCase() : 'NÃO INFORMADO'}\n` +
-        `*WhatsApp:* ${data.phone}\n` +
-        `*Clique no link para entrar em contato:* ${waLink}\n\n` +
-        `*Veículo:* ${data.type} - ${data.model}\n` +
-        `*Local de Origem:* ${data.origin}\n` +
-        `*Local de Destino:* ${data.destination}\n` +
-        `*Problema:* ${data.issue}\n\n` +
-        `*Quando:* ${data.schedule}\n` +
-        `*Forma de Pagamento:* ${data.payment}\n` +
-        `*Observações:* ${data.notes || 'Nenhuma'}\n\n` +
-        `⚠️ *Atenção:* O cliente acabou de fazer a solicitação, entre em contato imediatamente com a melhor proposta para garantir o serviço. Boa Sorte!`;
+        `- *Cliente:* ${data.name ? data.name.toUpperCase() : 'NÃO INFORMADO'}\n` +
+        `- *WhatsApp:* ${data.phone}\n` +
+        `Clique no link para entrar em contato: ${waLink}\n\n` +
+        `- *Veículo:* ${data.type} - ${data.model}\n` +
+        `- *Local de Origem:* ${data.origin}\n` +
+        `- *Local de Destino:* ${data.destination}\n` +
+        `- *Problema:* ${data.issue}\n\n` +
+        `- *Para Quando:* ${data.schedule}\n` +
+        `- *Forma de Pagamento:* ${data.payment}\n` +
+        `- *Observações:* ${data.notes || 'Nenhuma'}\n\n` +
+        `⚠️ *Atenção:* Cliente acabou de fazer a solicitação, entre em contato imediatamente com a melhor proposta para garantir o serviço. Boa sorte!`;
 
     try {
         // MONTAGEM DA URL
