@@ -33,7 +33,7 @@
         <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6">
             <div class="mb-8">
                 <h2 class="text-xl font-bold text-slate-800">Nova Solicitação de Guincho</h2>
-                <p class="text-slate-500 text-sm">Conectando Você ao Melhor Prestador.</p>
+                <p class="text-slate-500 text-sm">Conectando Você ao Melhor Prestador!</p>
             </div>
 
             <form id="towForm" class="space-y-6">
@@ -150,7 +150,7 @@
                     <!-- Dinheiro: Troco -->
                     <div id="moneyOptions" class="expandable">
                         <label class="block text-xs font-bold text-blue-600 mb-1 ml-1 mt-2">Precisa de troco para quanto?</label>
-                        <input type="text" id="changeAmount" placeholder="Ex: R$ 50,00 ou 'Não precisa'" 
+                        <input type="text" id="changeAmount" placeholder="Exemplo: R$ 50,00 ou 'Não precisa'" 
                             class="w-full px-4 py-3 rounded-xl bg-blue-50 border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm font-medium">
                     </div>
 
@@ -337,7 +337,7 @@
             } else if (selectedPayment === 'Dinheiro') {
                 const change = document.getElementById('changeAmount').value;
                 if (change) {
-                    finalPaymentString = `Dinheiro (Troco para: ${change})`;
+                    finalPaymentString = `Dinheiro (Troco para ${change})`;
                 } else {
                     finalPaymentString = `Dinheiro (Sem troco)`;
                 }
