@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17688764045"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17688764045');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guincho - Clientou</title>
@@ -344,7 +353,7 @@
             } else if (selectedPayment === 'Dinheiro') {
                 const change = document.getElementById('changeAmount').value;
                 if (change) {
-                    finalPaymentString = `Dinheiro (Troco para ${change})`;
+                    finalPaymentString = `Dinheiro (Troco para: ${change})`;
                 } else {
                     finalPaymentString = `Dinheiro (Sem troco)`;
                 }
@@ -376,6 +385,14 @@
                 });
 
                 if (response.ok) {
+				
+					gtag('event', 'conversion', {
+						  'send_to': 'AW-17688764045/gWQtCKnghfgbEI291PJB',
+						  'value': 1.0,
+						  'currency': 'BRL',
+						  'transaction_id': ''
+					});
+				  
                     document.getElementById('successModal').classList.remove('hidden');
                 } else {
                     alert("Ocorreu um erro no servidor. Tente novamente.");
