@@ -51,7 +51,7 @@ app.post('/send-message', async (req, res) => {
     const message = 
         `⚡ *NOVA SOLICITAÇÃO*\n\n` +
         `- *Cliente:* ${data.name ? data.name.toUpperCase() : 'NÃO INFORMADO'}\n` +
-        `- *WhatsApp:* ${data.phone}\n` +
+        `- *WhatsApp:* ${data.phone}\n\n` +
         `Clique no link para entrar em contato: ${waLink}\n\n` +
         `- *Veículo:* ${data.type} - ${data.model}\n` +
         `- *Local de Origem:* ${data.origin}\n` +
