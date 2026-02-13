@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientou - Serviços Especializados</title>
+    <title>Guincho | Clientou - Serviços Especializados</title>
+    <meta name="description" content="Precisa de Guincho Agora? Reboque rápido para Carros e Motos. Atendimento 24 Horas. Preço Justo. Chegamos rápido! Clique e solicite socorro imediato.">
+    <meta name="keywords" content="guincho, guincho 24h, reboque, auto socorro, guincho barato, guincho perto de mim, guincho moto, guincho carro, telefone guincho, plataforma, socorro mecânico">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Solicitar Guincho Agora - Chegamos Rápido!">
+    <meta property="og:description" content="Carro ou Moto quebrada? Solicite seu guincho em 1 clique. Atendimento imediato na sua localização.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutomotiveBusiness",
+      "name": "Clientou Guincho 24h",
+      "image": "",
+      "description": "Serviço de guincho e reboque 24 horas para carros e motos.",
+      "telephone": "+5500000000000",
+      "priceRange": "$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BR"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -11,21 +39,24 @@
         body { font-family: 'Inter', sans-serif; }
         .option-card.active { border-color: #2563eb; background-color: #eff6ff; border-width: 2px; }
         .payment-card.active { background-color: #2563eb; color: white; border-color: #2563eb; }
-        /* Animação suave para abrir os campos extras */
         .expandable { transition: all 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
         .expandable.open { max-height: 200px; opacity: 1; margin-top: 0.5rem; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen pb-12">
 
-    <!-- Header Neutro CLIENTOU -->
+    <div class="sr-only">
+        <h1>Guincho 24 Horas</h1>
+        <h2>Reboque de Carro e Moto</h2>
+        <p>Serviço de guincho barato, guincho plataforma, socorro de bateria, pane seca, troca de pneu. Atendemos em todas as regiões. Guincho zona norte, guincho zona sul, guincho zona leste, guincho zona oeste, guincho centro. Telefone de guincho emergência.</p>
+    </div>
+
     <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div class="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
             <div>
                 <h1 class="text-2xl font-black text-blue-600 tracking-tighter">CLIENTOU</h1>
                 <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400 -mt-1">Serviços Especializados</p>
             </div>
-            <!-- REMOVIDO: PRESTADORES ONLINE -->
         </div>
     </header>
 
@@ -37,14 +68,12 @@
             </div>
 
             <form id="towForm" class="space-y-6">
-                <!-- Nome -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Seu Nome</label>
                     <input type="text" id="name" required placeholder="Como você chama?" 
                         class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
                 </div>
 
-                <!-- WhatsApp -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Seu WhatsApp (Com DDD)</label>
                     <div class="relative">
@@ -57,7 +86,6 @@
                     <p class="text-[10px] text-slate-400 mt-1 ml-1">O prestador entrará em contato por este número!</p>
                 </div>
 
-                <!-- Tipo de Veículo -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide text-[11px]">Tipo do Veículo</label>
                     <div class="grid grid-cols-3 gap-3">
@@ -77,14 +105,12 @@
                     <input type="hidden" id="vehicleType" required>
                 </div>
 
-                <!-- Modelo do Veículo -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Qual é o veículo?</label>
                     <input type="text" id="vehicleModel" required placeholder="Exemplo: CG 160, Honda Civic, etc..." 
                         class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all text-sm">
                 </div>
 
-                <!-- Onde buscar -->
                 <div class="space-y-2">
                     <label class="block text-sm font-bold text-slate-700 uppercase tracking-wide text-[11px]">Onde buscar?</label>
                     <div class="relative">
@@ -96,7 +122,6 @@
                     </div>
                 </div>
 
-                <!-- Onde levar -->
                 <div class="space-y-2">
                     <label class="block text-sm font-bold text-slate-700 uppercase tracking-wide text-[11px]">Onde levar?</label>
                     <div class="relative">
@@ -108,14 +133,12 @@
                     </div>
                 </div>
 
-                <!-- Problema -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Qual o problema?</label>
                     <textarea id="issue" rows="2" placeholder="Exemplo: Moto travada, acidente, pane elétrica, etc..." 
                         class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all resize-none text-sm"></textarea>
                 </div>
 
-                <!-- Agendamento -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Quando retirar?</label>
                     <div class="flex gap-2 p-1.5 bg-slate-100 rounded-2xl">
@@ -125,11 +148,9 @@
                     <input type="datetime-local" id="scheduleDate" class="hidden mt-3 w-full px-4 py-4 rounded-2xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm">
                 </div>
 
-                <!-- Pagamento -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide text-[11px]">Forma de Pagamento</label>
                     
-                    <!-- Opções Principais -->
                     <div class="grid grid-cols-3 gap-2">
                         <button type="button" onclick="selectPayment('Pix')" class="payment-card border-2 border-slate-100 rounded-xl px-2 py-4 text-center text-xs font-bold flex flex-col items-center gap-1 transition-all bg-slate-50">
                             <i data-lucide="qr-code" class="w-5 h-5"></i>
@@ -145,16 +166,12 @@
                         </button>
                     </div>
 
-                    <!-- Campos Condicionais -->
-                    
-                    <!-- Dinheiro: Troco -->
                     <div id="moneyOptions" class="expandable">
                         <label class="block text-xs font-bold text-blue-600 mb-1 ml-1 mt-2">Precisa de troco para quanto?</label>
                         <input type="text" id="changeAmount" placeholder="Exemplo: R$ 50,00 ou 'Não precisa'" 
                             class="w-full px-4 py-3 rounded-xl bg-blue-50 border border-blue-200 focus:ring-2 focus:ring-blue-500 outline-none text-sm font-medium">
                     </div>
 
-                    <!-- Cartão: Débito ou Crédito -->
                     <div id="cardOptions" class="expandable">
                         <label class="block text-xs font-bold text-blue-600 mb-1 ml-1 mt-2">Qual tipo de cartão?</label>
                         <div class="grid grid-cols-2 gap-2">
@@ -171,14 +188,12 @@
                     <input type="hidden" id="finalPaymentDetail" required>
                 </div>
 
-                <!-- Observações -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide text-[11px]">Observações</label>
                     <textarea id="notes" rows="2" placeholder="Algo mais que o prestador precisa saber?" 
                         class="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none text-sm"></textarea>
                 </div>
 
-                <!-- Botão de Envio -->
                 <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-[0.98] flex items-center justify-center gap-3 text-lg uppercase tracking-wider">
                     <i data-lucide="zap" class="w-6 h-6 fill-white"></i>
                     SOLICITAR AGORA
@@ -196,13 +211,11 @@
         </div>
     </main>
 
-    <!-- Overlay de Loading -->
     <div id="loading" class="fixed inset-0 bg-white/90 backdrop-blur-md z-[100] hidden flex flex-col items-center justify-center">
         <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
         <p class="font-black text-blue-600 text-xl animate-pulse tracking-tight">ENVIANDO PARA OS PRESTADORES...</p>
     </div>
 
-    <!-- Modal de Sucesso -->
     <div id="successModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[110] hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[40px] p-10 max-w-sm w-full text-center shadow-2xl">
             <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -218,8 +231,8 @@
         lucide.createIcons();
 
         let selectedType = '';
-        let selectedPayment = ''; // Armazena: Pix, Dinheiro, Cartão
-        let selectedCardDetail = ''; // Armazena: Débito ou Crédito
+        let selectedPayment = ''; 
+        let selectedCardDetail = ''; 
         let schedule = 'AGORA';
 
         function selectType(type) {
@@ -234,16 +247,13 @@
             selectedPayment = method;
             document.getElementById('paymentMethod').value = method;
             
-            // UI Update nos botões principais
             document.querySelectorAll('.payment-card').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent.includes(method));
             });
 
-            // Gerenciar visibilidade das sub-opções
             const moneyOpts = document.getElementById('moneyOptions');
             const cardOpts = document.getElementById('cardOptions');
             
-            // Resetar sub-seleções ao trocar o método principal
             selectedCardDetail = ''; 
             document.querySelectorAll('.card-type-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
@@ -258,7 +268,6 @@
                 cardOpts.classList.add('open');
                 moneyOpts.classList.remove('open');
             } else {
-                // Pix
                 moneyOpts.classList.remove('open');
                 cardOpts.classList.remove('open');
             }
@@ -266,7 +275,6 @@
 
         function setCardType(type) {
             selectedCardDetail = type;
-            // Visual feedback
             document.querySelectorAll('.card-type-btn').forEach(btn => {
                 if(btn.textContent.includes(type.toUpperCase())) {
                     btn.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-200');
@@ -325,7 +333,6 @@
             if(!selectedType) { alert("Selecione o tipo do veículo."); return; }
             if(!selectedPayment) { alert("Selecione a forma de pagamento."); return; }
             
-            // Validações extras para Cartão e Dinheiro
             let finalPaymentString = selectedPayment;
             
             if (selectedPayment === 'Cartão') {
@@ -355,12 +362,11 @@
                 destination: document.getElementById('destination').value,
                 issue: document.getElementById('issue').value,
                 schedule: schedule === 'AGORA' ? 'Agora (Imediato)' : document.getElementById('scheduleDate').value,
-                payment: finalPaymentString, // Envia a string formatada
+                payment: finalPaymentString, 
                 notes: document.getElementById('notes').value
             };
 
             try {
-                // URL DO SEU BACKEND NO RENDER
                 const BACKEND_URL = 'https://clientou-guincho.onrender.com/send-message';
                 
                 const response = await fetch(BACKEND_URL, {
