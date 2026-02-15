@@ -60,7 +60,7 @@ app.post('/send-message', async (req, res) => {
         `- *Quando Retirar:* ${data.schedule}\n` +
         `- *Forma de Pagamento:* ${data.payment}\n` +
         `- *Observações:* ${data.notes || 'Nenhuma'}\n\n` +
-        `⚠️ *Atenção:* Cliente acabou de fazer a solicitação, entre em contato imediatamente com a melhor proposta para garantir o serviço. Boa sorte!`;
+        `⚠️ *Atenção:* O cliente está sem guincho agora. Entre em contato imediatamente para pegar o serviço. ​Boas vendas!`;
 
     try {
         // MONTAGEM DA URL
